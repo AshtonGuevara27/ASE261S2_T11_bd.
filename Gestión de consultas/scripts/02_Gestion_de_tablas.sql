@@ -1,142 +1,50 @@
-## -----------------------------------------------------------------
--- Tema     : Gestión de Tablas desde Cero
--- Curso    : Base de Datos 1
--- SGBD     : MySQL 5x
--- Profesor : Jesús Canales G.
--- ----------------------------------------------------------------- ##
+-- -----------------------------------------------------------------
+-- Tema     : Inserción y Gestión de Datos (DML)
+-- Proyecto : Asociación Distrital de Apicultores de Matapalo (ADAM)
+-- Equipo   : T11
+-- SGBD     : MySQL 8.x / 5.x
+-- -----------------------------------------------------------------
 
-## CREACIÓN DE BASE DE DATOS PRO
-CREATE DATABASE IF NOT EXISTS dbConsultas_Carreras
-CHARACTER SET utf8mb4
-COLLATE utf8mb4_spanish_ci;
-USE dbConsultas_Carreras;
-###
+USE db_adam_apicultores;
 
-## Motor de almacenamiento
--- 1. Es responsable de cómo se almacenan, recuperan y gestionan los datos en MySQL.
--- 2. MySQL ofrece varios motores de almacenamiento: InnoDB, MyISAM, MEMORY, CSV, ARCHIVE, y FEDERATED.
--- 3. MySQL permite seleccionar el motor de almacenamiento para cada tabla de forma independiente.
--- 4. Cada motor te permite diseñar bases de datos más eficientes y adecuadas para tus aplicaciones.
--- 5. InnoDB: Soporta transacciones, integridad referencial y bloqueo a nivel de fila.
--- 6. MyISAM: Optimizado para lecturas rápidas y con un enfoque de solo lectura.
--- 7. Para listar los motores disponibles: SHOW ENGINES;
+-- =================================================================
+-- GESTIÓN DE REGISTROS (DML)
+-- 1. La sentencia INSERT permite registrar nuevas filas en las tablas.
+-- 2. La sentencia SELECT permite consultar e inspeccionar los datos.
+-- =================================================================
 
-## GESTION DE TABLAS
--- 1. Es la estructura fundamental de una BD relacional.
--- 2. Las tablas están organizadas en filas(registros) y columnas(atributos).
--- 3. Permiten organizar, almacenar y acceder a los datos.
--- 4. Las tablas son la base sobre las que se ejecutan consultas SQL
--- 5. Su diseño y organización son cruciales para garantizar la eficiencia e integridad de datos.
+-- 1. INSERCIÓN DE DATOS EN LA TABLA: contactos (Consultas de clientes)
+INSERT INTO contactos (nombre, email, telefono, empresa, asunto, mensaje, estado)
+VALUES 
+('Carlos Mendoza', 'carlos.mendoza@gmail.com', '987654321', 'Apícola del Norte', 'Consulta sobre Miel de Abeja', 'Deseo solicitar catálogo e información de precios al por mayor.', 'pendiente'),
+('Ana Torres', 'ana.torres@hotmail.com', '912345678', NULL, 'Inscripción a capacitación', 'Consulta sobre las fechas del próximo taller de apicultura en Matapalo.', 'atendido'),
+('Luis Lévano', 'llevano@gmail.com', '955443322', 'Distribuidora Lévano', 'Pedido de Polen', 'Buenas tardes, quisiera consultar la disponibilidad de polen por saco de 10kg.', 'pendiente');
 
-#  CREAR TABLAS
--- Sintaxis: 
--- CREATE TABLE nombre_tabla (
---    columna1 tipo_datos [opciones],
---    columna2 tipo_datos [opciones],
---    columna3 tipo_datos [opciones],
---    ...
--- ) [Engine=tipo_motor];
--- Ejemplo:
+-- 2. INSERCIÓN DE DATOS EN LA TABLA: productos (Catálogo Apícola)
+INSERT INTO productos (nombre, descripcion, precio_base, precio_mayorista, precio_empresa, cantidad_disponible, sku, categoria)
+VALUES 
+('Miel de Abeja 1Kg', 'Miel pura 100% de floración silvestre de Matapalo.', 35.00, 28.00, 25.00, 150, 'MEL-001', 'Miel'),
+('Polen Granulado 250g', 'Polen multifloral recolectado en Tumbes.', 25.00, 20.00, 18.00, 80, 'POL-001', 'Derivados'),
+('Propóleo en Gotas 30ml', 'Extracto concentrado de propóleo natural.', 20.00, 15.00, 12.00, 200, 'PRO-001', 'Salud');
 
--- Creación de tabla solicitante
-CREATE TABLE applicant (
-	id int auto_increment not null,
-    registration_date timestamp DEFAULT current_timestamp,
-    name varchar(60) not null,
-    lastname varchar(100) not null,
-    sex char(1) not null, 
-    identification_document char(3) not null, 
-    document_number char(15) not null, 
-    email varchar(120),
-    cellphone char(9) not null,
-    state char(1) DEFAULT 'A',
-    CONSTRAINT pk_applicant PRIMARY KEY (id)
-) ENGINE=MyISAM;
+-- 3. INSERCIÓN DE DATOS EN LA TABLA: usuarios
+INSERT INTO usuarios (tipo, correo, contraseña, nombre_completo, telefono, direccion)
+VALUES 
+('usuario', 'ashton.guevara@adam.pe', '$2a$12$eImiTXuWVxfM37uY4JANjO', 'Ashton Guevara', '944332211', 'Av. Principal Matapalo - Tumbes'),
+('mayorista', 'cliente.mayorista@gmail.com', '$2a$12$eImiTXuWVxfM37uY4JANjO', 'Juan Pérez', '988776655', 'Jr. Comercio 123');
 
--- Creación de tabla consulta
-CREATE TABLE consultation (
-	id int auto_increment not null,
-    consultation_date timestamp DEFAULT current_timestamp,
-    applicant int not null,
-    career char(3) not null,
-    consultation varchar(500) not null,
-    adviser int,
-    answer varchar(500),
-    state char(1) DEFAULT 'A',
-    CONSTRAINT pk_consultation PRIMARY KEY(id)
-)ENGINE=InnoDB;
+-- 4. INSERCIÓN DE DATOS EN LA TABLA: newsletter
+INSERT INTO newsletter (correo, suscrito)
+VALUES 
+('suscriptor1@gmail.com', TRUE),
+('suscriptor2@hotmail.com', TRUE);
 
--- Creación de tabla carrera
-CREATE TABLE IF NOT EXISTS career (
-	id char(3) not null,
-    name varchar(100) not null,
-    description varchar(500) not null,
-    state char(1) DEFAULT 'A',
-    CONSTRAINT pk_career PRIMARY KEY (id)
-)ENGINE=MyISAM;
+-- =================================================================
+-- CONSULTA Y VERIFICACIÓN DE DATOS ESTRUCTURADOS
+-- =================================================================
 
--- Creación de tabla asesor
-CREATE TABLE IF NOT EXISTS adviser (
-	id int auto_increment not null,
-    registration_date timestamp DEFAULT current_timestamp,
-    name varchar(60) not null,
-    lastname varchar(100) not null,
-    identification_document char(3) not null,
-    document_number char(15) not null,
-    email varchar(60) not null,
-    cellphone char(9) not null,
-    state char(1) DEFAULT 'A',
-    CONSTRAINT pk_adviser PRIMARY KEY (id)
-) ENGINE=MyISAM;
+-- Consultar la Vista de Reporte de Consultas generada (Entregable final)
+SELECT * FROM vw_reporte_consultas;
 
-## LISTAR TABLAS 
--- Sintaxis: SHOW TABLES;
--- Ejemplo:
-SHOW TABLES;
-
-## VER ESTRUCTURA DE TABLA
--- Sintaxis: DESCRIBE nombre_tabla;
--- Ejemplo:
-DESCRIBE applicant;
-
-#  AGREGAR COLUMNA A TABLA
--- Sintaxis: 
--- ALTER TABLE nombre_tabla (
--- ADD COLUMN columna1 tipo_datos [opciones];
--- Ejemplo 01: Agregar columna fecha de nacimiento en la tabla applicant
-ALTER TABLE applicant
-ADD COLUMN birthdate date;
-DESCRIBE applicant;
-
--- Ejemplo 02: Agregar columna estado civil en tabla asesor
-ALTER TABLE adviser
-ADD COLUMN marital_status char(1);
-DESCRIBE adviser;
-
-#  MODIFICAR COLUMNA DE TABLA
--- Sintaxis: 
--- ALTER TABLE nombre_tabla (
--- MODIFY COLUMN nuevo_nombre_columna nuevo_tipo_datos [nuevas_opciones];
--- Ejemplo: Modificar a 20 caracteres el campo número de documento en tabla solicitante
-ALTER TABLE applicant
-MODIFY COLUMN document_number char(20);
-DESCRIBE applicant;
-
-#  ELIMINAR COLUMNA DE TABLA
--- Sintaxis: 
--- ALTER TABLE nombre_tabla (
--- DROP COLUMN nombre_columna;
--- Ejemplo: Eliminar la columna estado civil en tabla asesor
-ALTER TABLE adviser
-DROP COLUMN marital_status;
-DESCRIBE adviser;
-
-#  ELIMINAR TABLA
--- Sintaxis: 
--- DROP TABLE nombre_tabla;
--- Ejemplo: Eliminar la tabla carrera
-DROP TABLE career;
-SHOW TABLES;
-
--- Elimina una tabla siempre y cuando exista
-DROP TABLE IF EXISTS career;
+-- Consultar catálogo de productos
+SELECT id, nombre, precio_base, cantidad_disponible FROM productos;

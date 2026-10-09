@@ -1,21 +1,20 @@
-# REGISTRO Y GESTIÓN DE CONSULTAS 
+# REGISTRO Y GESTIÓN DE CONSULTAS DE APICULTORES
 
-## Descripción de caso
+## Descripción del caso
 
-El Instituto Valle Grande en la actualidad cuenta con una gran cantidad de personas interesadas en conocer más sobre las carreras profesionales que ofrece: Análisis de Sistemas Empresariales y Gestión Agrícola.  Por ello, realizan sus consultas a través de los diversos canales digitales (redes sociales, página web, entre otros.) y es un desafío poder atender todas a tiempo, esto dificulta la toma de decisión de los interesados en poder postular y estudiar en Valle Grande. Un dato importante a tener en cuenta es que por ahora hay una persona encargada de atender las consultas por cada carrera.
+La Asociación Distrital de Apicultores de Matapalo (ADAM) cuenta con un volumen creciente de personas e instituciones interesadas en adquirir sus productos apícolas (miel, polen, propóleo) y consultar sobre servicios de capacitaciones y asistencia técnica. Actualmente, estas consultas se reciben por diversos canales digitales y telefónicos sin un control centralizado, lo que dificulta responder a tiempo a los clientes e interesados.
 
-En este sentido, es de vital importancia poder contar con un sistema que nos permita no solo atender las consultas de los interesados sino también con ello brindar un servicio de alta calidad que priorice la rapidez de las respuestas así como también la satisfacción del usuario. Si podemos mejorar la atención de consultas, podemos hacer un mejor control de seguimiento y con ello vamos a incrementar la cantidad de postulantes y estudiantes en Valle Grande, que es el objetivo al que apunta el área de marketing.
+Para solucionar esta problemática, se requiere un módulo centralizado dentro del sistema web que permita registrar, procesar y dar seguimiento oportuno a las consultas recibidas, optimizando el tiempo de respuesta y mejorando la atención al cliente.
 
 ## Alcance
 
-* **Registro de consultas:** Permitir a los interesados registrar nuevas consultas y recibir pronta respuesta de los asesores respectivos a través de su correo electrónico.
-* **Asignación de consultas:** Automatizar la asignación de consultas a los asesores según la carrera profesional que tengan a cargo para que puedan brindar un respuesta rápida y concreta.
-* **Búsqueda de consultas:** Facilitar la búsqueda de consultas por diversos criterios (fecha, interesado, carrera, asesor, etc.).
-* **Generación de reportes:** Crear reportes personalizados para analizar el desempeño del sistema y tomar decisiones estratégicas.
+- **Registro de consultas:** Permitir a los usuarios y clientes registrar nuevas consultas desde el sitio web con sus datos de contacto y detalle del mensaje.
+- **Asignación de consultas:** Derivar automáticamente las consultas registradas según su estado (Pendiente / Atendido) para el personal encargado de la asociación.
+- **Búsqueda y filtrado:** Facilitar la búsqueda de consultas por criterios clave (cliente, fecha, asunto, estado).
+- **Generación de reportes:** Proporcionar vistas consolidadas (`views`) en la base de datos para generar reportes del estado de atención de las consultas.
 
 ## Beneficios esperados
 
-* **Mejora de la atención al cliente:** Respuestas más rápidas y personalizadas para una mejor decisión.
-* **Optimización de recursos:** Asignación de tareas eficiente de los asesores de cada carrera.
-* **Mayor visibilidad:** Acceso a información detallada sobre las consultas y el desempeño del equipo.
-* **Soporte a la toma de decisiones:** Generación de reportes personalizados para identificar tendencias y oportunidades de mejora.
+- **Optimización de la atención:** Respuestas oportunas a los potenciales compradores y socios.
+- **Trazabilidad de la información:** Registro histórico y organizado de todas las solicitudes enviadas a la asociación.
+- **Soporte a la toma de decisiones:** Información clara para generar reportes de rendimiento e identificar los productos o temas de mayor interés.
